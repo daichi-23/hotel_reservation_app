@@ -1,16 +1,59 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Hrapp</title>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <title>Hrapp</title>
   </head>
 
   <body>
+    <header>
+      <% if (!user_signed_in?) %>
+        <div class="flex-container">
+          <h2><%= link_to "Hotel Reservation App", "/" %></h2>
+          <div class="flex-container">
+            <%= link_to "ログイン", new_user_session_path %>
+            <%= link_to "新規登録", new_user_registration_path, class: "button-orange" %>
+          </div>
+        </div>
+      <% else %>
+        <div class="flex-container">
+          <h2><%= link_to "Hotel Reservation App", "/" %></h2>
+          <div class="header-list">  <!--# 仮 -->
+            <% if current_user.image.present? %>
+              <span class="header-icon"><%= image_tag current_user.image.url, class: "header-icon" %></span>
+            <% else %>
+              <span class="header-icon"><img src="https://rails-02-sample.herokuapp.com/assets/common/default-avatar-7a6cbfd7993e89f24bfc888f4a035a83c6f1428b8bdc47eed9095f2799a40153.png" class="header-icon"></span>
+            <% end %>
+
+            <div class="drop-down">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <%= current_user.name %>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" data-turbolinks="false">
+                <p class="dropdown-item">施設の施設の新規登録</p>
+                <p class="dropdown-item">予約済み一覧</p>
+                <p class="dropdown-item"> 登録済み一覧</p>
+                <%= link_to "アカウント", user_path(current_user), class: "dropdown-item" %>
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </header>
+
     <%= yield %>
+    <p class="notice"><%= notice %></P>
+    <P class="alert"><%= alert %></p>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.6/dist/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
   </body>
 </html>
