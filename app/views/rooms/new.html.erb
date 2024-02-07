@@ -1,0 +1,33 @@
+<div class="form-container">
+  <h2>新規登録</h2>
+
+  <%= render "shared/error_messages", obj: @room %>
+
+  <%= form_with model: @room, local: true do |f| %>
+    <div class="room-form-item">
+      <%= f.label :room_name, "施設名" %>
+      <%= f.text_field :room_name, placeholder: "ルーム名を入力", class: "room-form-input" %>
+    </div>
+    <div class="room-form-item">
+      <%= f.label :room_introduction, "施設詳細" %>
+      <%= f.text_area :room_introduction,placeholder: "施設詳細を入力", class: "room-form-input" %>
+    </div>
+    <div class="room-form-item">
+      <%= f.label :price, "料金" %>
+      <%= f.text_field :price, placeholder: "1日あたりの料金を入力", class: "room-form-input" %>
+    </div>
+    <div class="room-form-item">
+      <%= f.label :address, "住所" %>
+      <%= f.text_field :address, placeholder: "住所を入力", class: "room-form-input" %>
+    </div>
+    <div class="room-form-item">
+      <%= f.label :room_image, "施設画像" %>
+      <p class="room-form-input"><%= f.file_field :image, id: :room_pic %></p>
+    </div>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.submit "保存", class: "room-orange-button" %>
+  <% end %>
+  <div data-turbolinks="false">
+    <%= link_to "キャンセル", :back, class: "room-white-button" %>
+  </div>
+</div>

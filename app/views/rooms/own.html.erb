@@ -1,0 +1,43 @@
+<div class="container">
+  <h2>登録済み一覧</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>画像</th>
+        <th>施設名</th>
+        <th>紹介文</th>
+        <th>料金</th>
+        <th>作成日</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @rooms.each do |room| %>
+      
+        <tr>
+          <td>
+            <% if room.room_image.present? %>
+              <%= image_tag room.room_image.url, class: "own-room-image" %>
+            <% else %>
+            <img src="https://rails-02-sample.herokuapp.com/assets/room/default-image-4e0ac6b8d01335b5b22fe6586af13644ae51dddb6aeabf35b9174e80f13cd09d.png" alt="部屋画像" class="own-room-image" >
+            <% end %>
+          </td>
+          <td class="own-name-link"><%= link_to room.room_name, room %></td>
+          <td><%= room.room_introduction %></td>
+          <td>¥<%= room.price.to_s(:delimited) %>~</td>
+          <td><%= room.created_at.to_s(:datetime_jp) %></td>
+          <td>
+            <div class="drop-down">
+              <button class="own-menu btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">メニュー</button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" data-turbolinks="false">
+                <%= link_to "編集", edit_room_path(room), class: "dropdown-item" %>
+                <%= link_to "施設を削除", room, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "dropdown-item" %>
+              </div>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

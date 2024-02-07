@@ -14,7 +14,7 @@
   <body>
     <header>
       <% if (!user_signed_in?) %>
-        <div class="flex-container">
+        <div class="header-container">
           <h2><%= link_to "Hotel Reservation App", "/" %></h2>
           <div class="flex-container">
             <%= link_to "ログイン", new_user_session_path %>
@@ -22,7 +22,7 @@
           </div>
         </div>
       <% else %>
-        <div class="flex-container">
+        <div class="header-container">
           <h2><%= link_to "Hotel Reservation App", "/" %></h2>
           <div class="header-list">  <!--# 仮 -->
             <% if current_user.image.present? %>
@@ -36,10 +36,12 @@
                 <%= current_user.name %>
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" data-turbolinks="false">
-                <p class="dropdown-item">施設の施設の新規登録</p>
+                <%= link_to "施設の新規登録", new_room_path, class: "dropdown-item" %>
+                <div class="dropdown-divider"></div>
                 <p class="dropdown-item">予約済み一覧</p>
-                <p class="dropdown-item"> 登録済み一覧</p>
+                <%= link_to "登録済み一覧", rooms_own_path(current_user), class: "dropdown-item" %>
                 <%= link_to "アカウント", user_path(current_user), class: "dropdown-item" %>
+                <div class="dropdown-divider"></div>
                 <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
               </div>
             </div>

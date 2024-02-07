@@ -4,21 +4,21 @@
 
   <div class="user-container">
     <ul class="side-navi">
-      <li class="side-navi-item"><%= link_to "アカウント", user_path(@user) %></li>
+      <li class="side-navi-item" data-turbolinks="false"><%= link_to "アカウント", user_path(@user) %></li>
       <li class="side-navi-item"><%= link_to "プロフィール", users_profile_path(@user) %></li>
     </ul>
 
     <div class="account-information">
-      <div class="account-information-header">
+      <div class="account-information-header" data-turbolinks="false">
         <h2>アカウント</h2>
         <%= link_to "編集", edit_user_registration_path %>
       </div>      
       <div class="">
-        <div class="account-information-list">
+        <div class="account-information-item">
           <label class="account-information-label">メールアドレス</label>
           <%= @user.email %>
         </div>
-        <div class="account-information-list">
+        <div class="account-information-item">
           <label class="account-information-label">パスワード</label>
           <p>*********</p>
         </div>       

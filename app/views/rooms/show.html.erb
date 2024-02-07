@@ -1,0 +1,29 @@
+<%= render "shared/search_area" %>
+
+<div class="container" data-turbolinks="false">
+  <div class="room-details-header">
+    <%= link_to "戻る", :back, class: "blue-text" %>
+    <% if @user.id==@room.user_id %>
+      <%= link_to "編集", edit_room_path(@room), class: "blue-text" %>  <!--#自分の投稿のみ未実装-->
+    <% end %>
+  </div>
+  <div class="room-details-container">
+    <% if @room.room_image.present? %>
+      <%= image_tag @room.room_image.url, class: "room-details-image" %>
+    <% else %>
+      <img src="https://rails-02-sample.herokuapp.com/assets/room/default-image-4e0ac6b8d01335b5b22fe6586af13644ae51dddb6aeabf35b9174e80f13cd09d.png" alt="部屋画像" class="room-details-image" >
+    <% end %>
+
+    <div class="room-details">
+      <div class="room-details-name-and-price">
+        <p class="room-details-name"><%= @room.room_name %></p>
+        <p class="room-details-price">¥<%= @room.price.to_s(:delimited) %>~</p>
+      </div>
+      <p class="room-details-address"><%= @room.address %></p>
+      <p class="room-details-introduction"><%= @room.room_introduction %></p>
+      <div class="reservation-form">
+
+      </div>
+    </div>
+  </div>
+</div>
