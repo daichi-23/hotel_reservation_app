@@ -38,7 +38,7 @@
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" data-turbolinks="false">
                 <%= link_to "施設の新規登録", new_room_path, class: "dropdown-item" %>
                 <div class="dropdown-divider"></div>
-                <p class="dropdown-item">予約済み一覧</p>
+                <%= link_to "予約済み一覧", reservations_path, class: "dropdown-item" %>
                 <%= link_to "登録済み一覧", rooms_own_path(current_user), class: "dropdown-item" %>
                 <%= link_to "アカウント", user_path(current_user), class: "dropdown-item" %>
                 <div class="dropdown-divider"></div>

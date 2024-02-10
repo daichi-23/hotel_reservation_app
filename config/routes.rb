@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  get 'reservations/index'
   get 'rooms/index'
   root to: 'home#index'
   devise_for :users, controllers: { registrations: 'users/registrations' }#controllers以下あるとエラー
@@ -14,6 +15,12 @@ Rails.application.routes.draw do
   resources:rooms do
     collection do
       get 'search'
+    end
+  end
+  
+  resources:reservations do
+    collection do
+      post :confirm
     end
   end
   

@@ -3,8 +3,8 @@
 <div class="container" data-turbolinks="false">
   <div class="room-details-header">
     <%= link_to "戻る", :back, class: "blue-text" %>
-    <% if @user.id==@room.user_id %>
-      <%= link_to "編集", edit_room_path(@room), class: "blue-text" %>  <!--#自分の投稿のみ未実装-->
+    <% if current_user.id==@room.user_id %>
+      <%= link_to "編集", edit_room_path(@room), class: "blue-text" %>
     <% end %>
   </div>
   <div class="room-details-container">
@@ -21,8 +21,27 @@
       </div>
       <p class="room-details-address"><%= @room.address %></p>
       <p class="room-details-introduction"><%= @room.room_introduction %></p>
-      <div class="reservation-form">
-
+      <div class="reservation-form-container">
+        <%= render "shared/error_messages", obj: @reservation %>
+        <%= form_with model: @reservation, url: confirm_reservations_path(@reservation), local: true do |f| %>
+          <div class="reservation-form">
+            <div class="reservation-form-item">
+              <%= f.label :start_date, "チェックイン" %>
+              <%= f.date_field :start_date, class: "reservation-form-input" %>
+            </div>
+            <div class="reservation-form-item">
+              <%= f.label :end_date, "チェックアウト" %>
+              <%= f.date_field :end_date, class: "reservation-form-input" %>
+            </div>
+            <div class="reservation-form-item">
+              <%= f.label :person_num, "人数" %>
+              <%= f.text_field :person_num, placeholder: "0", class: "reservation-form-input" %>
+            </div>
+            <%= f.hidden_field :user_id, value: current_user.id %>
+            <%= f.hidden_field :room_id, value: @room.id %>
+          </div>
+          <%= f.submit "予約する", class: "reservation-form-button" %>
+        <% end %>
       </div>
     </div>
   </div>

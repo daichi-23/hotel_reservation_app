@@ -1,5 +1,6 @@
 class Room < ApplicationRecord
   belongs_to :user
+  has_many :reservations, dependent: :destroy
 
   validates :room_name, presence: true
   validates :room_introduction, presence: true

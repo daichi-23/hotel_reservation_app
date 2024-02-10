@@ -23,7 +23,7 @@
             <img src="https://rails-02-sample.herokuapp.com/assets/room/default-image-4e0ac6b8d01335b5b22fe6586af13644ae51dddb6aeabf35b9174e80f13cd09d.png" alt="部屋画像" class="own-room-image" >
             <% end %>
           </td>
-          <td class="own-name-link"><%= link_to room.room_name, room %></td>
+          <td class="own-name-link" data-turbolinks="false"><%= link_to room.room_name, room %></td>
           <td><%= room.room_introduction %></td>
           <td>¥<%= room.price.to_s(:delimited) %>~</td>
           <td><%= room.created_at.to_s(:datetime_jp) %></td>

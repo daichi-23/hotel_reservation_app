@@ -10,3 +10,7 @@ ja:
         room_introduction: 施設詳細
         price: 料金
         address: 住所
+      reservation:
+        start_date: チェックイン
+        end_date: チェックアウト
+        person_num: 人数

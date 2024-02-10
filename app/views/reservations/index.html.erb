@@ -1,0 +1,48 @@
+<div class="container">
+  <h2>予約済み一覧</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>画像</th>
+        <th>施設名</th>
+        <th>紹介文</th>
+        <th>合計料金</th>
+        <th>チェックイン</th>
+        <th>チェックアウト</th>
+        <th>予約確定日時</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @reservations.each do |reservation| %>
+      
+        <tr>
+          <td>
+            <% if reservation.room.room_image.present? %>
+              <%= image_tag reservation.room.room_image.url, class: "own-room-image" %>
+            <% else %>
+              <img src="https://rails-02-sample.herokuapp.com/assets/room/default-image-4e0ac6b8d01335b5b22fe6586af13644ae51dddb6aeabf35b9174e80f13cd09d.png" alt="部屋画像" class="own-room-image" >
+            <% end %>
+          </td>
+          <td class="own-name-link"><%= link_to reservation.room.room_name, room_path(reservation.room_id) %></td>
+          <td><%= reservation.room.room_introduction %></td>
+          <td>¥<%= reservation.price_count.to_s(:delimited) %></td>
+          <td><%= reservation.start_date.strftime("%Y/%m/%d") %></td>
+          <td><%= reservation.end_date.strftime("%Y/%m/%d") %></td>
+          <td><%= reservation.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+          <td>
+            <div class="drop-down">
+              <button class="own-menu btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">メニュー</button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" data-turbolinks="false">
+                <%= link_to "予約を削除", reservation, method: :delete, data: {confirm: "本当に予約情報を削除しますか？"}, class: "dropdown-item" %>
+                
+              </div>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
