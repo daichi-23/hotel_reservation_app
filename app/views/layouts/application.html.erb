@@ -24,7 +24,7 @@
       <% else %>
         <div class="header-container">
           <h2><%= link_to "Hotel Reservation App", "/" %></h2>
-          <div class="header-list">  <!--# 仮 -->
+          <div class="header-list">
             <% if current_user.image.present? %>
               <span class="header-icon"><%= image_tag current_user.image.url, class: "header-icon" %></span>
             <% else %>

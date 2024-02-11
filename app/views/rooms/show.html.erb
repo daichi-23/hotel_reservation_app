@@ -3,8 +3,10 @@
 <div class="container" data-turbolinks="false">
   <div class="room-details-header">
     <%= link_to "戻る", :back, class: "blue-text" %>
-    <% if current_user.id==@room.user_id %>
-      <%= link_to "編集", edit_room_path(@room), class: "blue-text" %>
+    <% if current_user.present? %>
+      <% if current_user.id==@room.user_id %>
+        <%= link_to "編集", edit_room_path(@room), class: "blue-text" %>
+      <% end %>
     <% end %>
   </div>
   <div class="room-details-container">
@@ -37,7 +39,9 @@
               <%= f.label :person_num, "人数" %>
               <%= f.text_field :person_num, placeholder: "0", class: "reservation-form-input" %>
             </div>
-            <%= f.hidden_field :user_id, value: current_user.id %>
+            <% if current_user.present? %>
+              <%= f.hidden_field :user_id, value: current_user.id %>
+            <% end %>
             <%= f.hidden_field :room_id, value: @room.id %>
           </div>
           <%= f.submit "予約する", class: "reservation-form-button" %>

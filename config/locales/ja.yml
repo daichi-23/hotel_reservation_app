@@ -3,6 +3,7 @@ ja:
     models:
       user: ユーザー
       room: 部屋
+      reservation: 予約
     attributes:
       room:
         room_name: 施設名

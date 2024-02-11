@@ -1,10 +1,14 @@
-<% if obj.errors.any? %>
+<% obj = session[:error_messages] %>
+<% if !obj.nil? %>
   <div id="error_explanation" data-turbo-cache="false">
-    <h3><%= obj.errors.count %>件のエラー</h3>
+    <h3><%= obj.count %>件のエラー</h3>
     <ul>
-      <% obj.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+      <% obj.each do |msg| %>
+        <%# messege.each do |msg| %>
+          <li><%= msg %></li>
+        <%# end %>
       <% end %>
     </ul>
   </div>
 <% end %>
+<% session[:error_messages] = nil %>

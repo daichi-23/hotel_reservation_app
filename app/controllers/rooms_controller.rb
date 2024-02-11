@@ -13,7 +13,8 @@ class RoomsController < ApplicationController
       flash[:notice] = "施設が作成されました。"
       redirect_to room_path(@room)
     else
-      render :new
+      session[:error_messages] = @room.errors.full_messages   
+      redirect_to new_room_path
     end
   end
 
@@ -32,7 +33,8 @@ class RoomsController < ApplicationController
       flash[:notice] = "施設情報が更新されました。"
       redirect_to :room
     else
-      render :edit
+      session[:error_messages] = @room.errors.full_messages   
+      redirect_to edit_room_path(@room)
     end
   end
 
@@ -57,8 +59,6 @@ class RoomsController < ApplicationController
     else
       @rooms = Room.all
     end
-
-
   end
 
   private
