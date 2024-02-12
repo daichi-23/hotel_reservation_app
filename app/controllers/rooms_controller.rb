@@ -11,7 +11,7 @@ class RoomsController < ApplicationController
     @room = Room.new(room_params)
     if @room.save
       flash[:notice] = "施設が作成されました。"
-      redirect_to room_path(@room)
+      redirect_to rooms_own_path(@room)
     else
       session[:error_messages] = @room.errors.full_messages   
       redirect_to new_room_path

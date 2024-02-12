@@ -6,7 +6,7 @@ class Reservation < ApplicationRecord
   validates :end_date, presence: true
   validate :start_date_check
   validate :date_check
-  validates :person_num, presence: true, numericality: {greater_than_or_equal_to: 1}
+  validates :person_num, presence: true
     
   def start_date_check
     if start_date.present?
