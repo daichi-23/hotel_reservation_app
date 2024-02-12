@@ -1,0 +1,51 @@
+<div class="container">
+
+  <h2>設定</h2>
+
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="user-container">
+    <ul class="side-navi" data-turbolinks="false">
+      <li class="side-navi-item"><%= link_to "アカウント", user_path(@user) %></li>
+      <li class="side-navi-item"><%= link_to "プロフィール", users_profile_path(@user) %></li>
+    </ul>
+
+    <div class="account-information">
+      <div class="account-information-header">
+        <h2>アカウント</h2>
+      </div>      
+      <div class="">
+        <%= form_with model: @user, url: user_registration_path, local: true do |f| %>
+          <div class="account-information-item">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+          </div>
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div><%= t('.currently_waiting_confirmation_for_email', email: resource.unconfirmed_email) %></div>
+          <% end %>
+          <div class="account-information-item">
+            <label class="account-information-label">パスワード<br><span class="label_caption">＊変更する場合のみ</span></label>
+            <%= f.password_field :password, autocomplete: "new-password" %>
+            <% if @minimum_password_length %>
+              <br />
+              <em><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></em>
+            <% end %>
+          </div>
+          <div class="account-information-item">
+            <label class="account-information-label">確認用パスワード<br><span class="label_caption">＊変更する場合のみ</span></label>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+          </div>
+          <div class="account-information-item">
+            <label class="account-information-label">現在のパスワード</label>
+            <%= f.password_field :current_password, autocomplete: "current-password" %>
+          </div>
+          <div class="actions" data-turbolinks="false">
+            <%= f.submit "保存" %>
+            <%= link_to "キャンセル", user_path(@user) %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
